@@ -1,0 +1,1789 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>党培峰 | 3D Bento 灵动空间简历 - CS / 机器人 / AIGC</title>
+  <meta name="description" content="党培峰 - 计算机科学与技术 / 智能机器人开发 / AIGC全栈应用 / 跨界艺术 3D 灵动交互个人简历">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              900: '#0c4a6e',
+            },
+            cyber: {
+              pink: '#ec4899',
+              purple: '#a855f7',
+              emerald: '#10b981',
+              amber: '#f59e0b',
+              cyan: '#06b6d4',
+              neon: '#22c55e'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'PingFang SC', 'Microsoft YaHei', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Fira Code', 'monospace']
+          },
+          animation: {
+            'float-slow': 'float 8s ease-in-out infinite',
+            'pulse-glow': 'pulseGlow 3s ease-in-out infinite alternate',
+            'shimmer': 'shimmer 2.5s infinite linear',
+            'spin-slow': 'spin 12s linear infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+              '50%': { transform: 'translateY(-12px) rotate(1deg)' }
+            },
+            pulseGlow: {
+              '0%': { opacity: '0.4', filter: 'blur(20px) drop-shadow(0 0 10px rgba(14,165,233,0.3))' },
+              '100%': { opacity: '0.8', filter: 'blur(35px) drop-shadow(0 0 25px rgba(168,85,247,0.6))' }
+            },
+            shimmer: {
+              '0%': { backgroundPosition: '-200% 0' },
+              '100%': { backgroundPosition: '200% 0' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Vanilla Tilt 3D Parallax -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+
+  <!-- Custom Styles for High Dynamics -->
+  <style>
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #07070a; }
+    ::-webkit-scrollbar-thumb { background: #22222d; border-radius: 99px; }
+    ::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
+
+    body, a, button, input, [role="button"], select, textarea {
+      cursor: none !important;
+    }
+
+    /* Custom White Hollow Circle & Purple Center Dot Cursor */
+    #custom-cursor-ring {
+      pointer-events: none;
+      position: fixed;
+      width: 30px;
+      height: 30px;
+      border: 2px solid rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease, transform 0.08s ease-out;
+      z-index: 9999;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+    }
+
+    #custom-cursor-dot {
+      pointer-events: none;
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background-color: #a855f7;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: transform 0.15s ease-out;
+      z-index: 10000;
+      box-shadow: 0 0 10px #a855f7, 0 0 18px #ec4899;
+    }
+
+    /* Cursor Glow Ring */
+    #cursor-glow {
+      pointer-events: none;
+      position: fixed;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(14,165,233,0.12) 0%, rgba(168,85,247,0.05) 45%, transparent 70%);
+      transform: translate(-50%, -50%);
+      transition: width 0.3s ease, height 0.3s ease, background 0.3s ease;
+      z-index: 1;
+    }
+
+    /* Glass Bento Card Styles */
+    .bento-card {
+      position: relative;
+      background: rgba(15, 15, 22, 0.72);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1.75rem;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transform-style: preserve-3d;
+      overflow: hidden;
+    }
+
+    html:not(.dark) .bento-card {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05);
+    }
+
+    .bento-card::after {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 1.75rem;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.02), rgba(56,189,248,0.2));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    .bento-card:hover {
+      border-color: rgba(56, 189, 248, 0.5);
+      box-shadow: 0 25px 50px -12px rgba(14, 165, 233, 0.25), 0 0 30px rgba(168, 85, 247, 0.15);
+      transform: translateY(-4px) scale(1.005);
+    }
+
+    /* Piano Keys Interactive Glow */
+    .piano-key {
+      transition: all 0.12s ease;
+      user-select: none;
+      touch-action: manipulation;
+    }
+    .piano-key:active, .piano-key.active {
+      transform: translateY(4px) scale(0.96);
+      background: linear-gradient(180deg, #38bdf8 0%, #0284c7 100%) !important;
+      color: #ffffff !important;
+      box-shadow: 0 0 20px #38bdf8, inset 0 2px 4px rgba(255,255,255,0.5);
+    }
+
+    @keyframes cardFlowGlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .bento-card.card-flowing {
+      border-color: rgba(168, 85, 247, 0.7) !important;
+      box-shadow: 0 25px 50px -10px rgba(168, 85, 247, 0.4), 0 0 35px rgba(56, 189, 248, 0.3) !important;
+      background: linear-gradient(135deg, rgba(20, 20, 35, 0.88), rgba(45, 20, 65, 0.88), rgba(15, 35, 55, 0.88)) !important;
+      background-size: 250% 250% !important;
+      animation: cardFlowGlow 2.5s ease infinite !important;
+    }
+
+    .bento-card.card-flowing::after {
+      background: linear-gradient(135deg, rgba(168,85,247,0.9), rgba(56,189,248,0.9), rgba(236,72,153,0.9), rgba(168,85,247,0.9)) !important;
+      background-size: 300% 300% !important;
+      animation: cardFlowGlow 2s linear infinite !important;
+    }
+
+    /* AI Chat Typing Cursor */
+    .typing-cursor::after {
+      content: '▋';
+      animation: blink 0.8s infinite;
+      color: #38bdf8;
+    }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+    /* Shimmering Text Gradient */
+    .shimmer-text {
+      background: linear-gradient(90deg, #38bdf8, #a855f7, #ec4899, #38bdf8);
+      background-size: 300% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 4s ease infinite;
+    }
+
+    /* Print Styles */
+    @media print {
+      body { background: #fff !important; color: #000 !important; }
+      .no-print, #cursor-glow, #bg-canvas { display: none !important; }
+      .bento-card { background: #fff !important; border: 1px solid #ccc !important; box-shadow: none !important; backdrop-filter: none !important; break-inside: avoid; color: #000 !important; }
+      .shimmer-text { -webkit-text-fill-color: #000 !important; background: none !important; }
+    }
+  </style>
+</head>
+
+<body class="bg-[#07070c] text-zinc-100 min-h-screen font-sans antialiased selection:bg-brand-500 selection:text-white dark:bg-[#07070c] dark:text-zinc-100 relative overflow-x-hidden">
+
+  <div id="custom-cursor-ring" class="no-print"></div>
+  <div id="custom-cursor-dot" class="no-print"></div>
+
+  <!-- Cursor Glow Visual Effect -->
+  <div id="cursor-glow" class="no-print"></div>
+
+  <!-- Dynamic WebGL Particle Background Canvas -->
+  <canvas id="bg-canvas" class="fixed inset-0 pointer-events-none z-0 no-print opacity-70"></canvas>
+
+  <!-- Ambient Light Orbs -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0 no-print">
+    <div class="absolute -top-32 -left-32 w-[500px] h-[500px] bg-brand-500/20 rounded-full blur-[140px] animate-pulse-glow"></div>
+    <div class="absolute top-1/3 -right-32 w-[450px] h-[450px] bg-purple-600/20 rounded-full blur-[150px] animate-pulse-glow" style="animation-delay: 2s;"></div>
+    <div class="absolute -bottom-32 left-1/4 w-[500px] h-[500px] bg-cyber-emerald/15 rounded-full blur-[160px] animate-pulse-glow" style="animation-delay: 1s;"></div>
+  </div>
+
+  <!-- Floating Glass Navigation Bar -->
+  <header class="sticky top-4 z-50 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 no-print">
+    <div class="backdrop-blur-2xl bg-zinc-950/70 border border-zinc-800/80 rounded-2xl px-4 py-3 flex items-center justify-between shadow-2xl shadow-black/50">
+      
+      <!-- Brand Logo & Live Pill -->
+      <div class="flex items-center gap-3">
+        <a href="#" class="group flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 via-purple-500 to-cyber-pink flex items-center justify-center font-black text-white shadow-lg shadow-brand-500/30 text-xl tracking-widest group-hover:rotate-12 group-hover:scale-110 transition-all duration-300">
+            党
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-extrabold text-base sm:text-lg tracking-tight text-white group-hover:text-brand-400 transition-colors">党培峰</span>
+              <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 animate-pulse">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5 shadow-[0_0_8px_#10b981]"></span>
+                准大一 · 求职/交流
+              </span>
+            </div>
+            <span class="text-[11px] text-zinc-400 font-mono hidden sm:block">CS & Robotics & AIGC Dev</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Nav Links -->
+      <nav class="hidden md:flex items-center gap-6 text-xs font-semibold text-zinc-400 uppercase tracking-wider">
+        <a href="#about" class="hover:text-brand-400 transition-colors py-1">关于我</a>
+        <a href="#ai-assistant" class="hover:text-brand-400 transition-colors py-1">AI 互动问答</a>
+        <a href="#piano-lab" class="hover:text-brand-400 transition-colors py-1">音乐实验室</a>
+        <a href="#robot-lab" class="hover:text-brand-400 transition-colors py-1">机器人避障</a>
+        <a href="#projects" class="hover:text-brand-400 transition-colors py-1">核心项目</a>
+        <a href="#ai-certificates" class="hover:text-brand-400 transition-colors py-1">AI证书展示台</a>
+        <a href="#talent-show" class="hover:text-brand-400 transition-colors py-1">才艺展示栏目</a>
+        <a href="#growth" class="hover:text-brand-400 transition-colors py-1">成长经历</a>
+        <a href="#skills" class="hover:text-brand-400 transition-colors py-1">技能矩阵</a>
+      </nav>
+
+      <!-- Action Tools -->
+      <div class="flex items-center gap-2">
+        <!-- Live Clock -->
+        <div class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-900/90 border border-zinc-800 text-[11px] font-mono text-zinc-400">
+          <i data-lucide="clock" class="w-3.5 h-3.5 text-brand-400 animate-spin-slow"></i>
+          <span id="live-clock">00:00:00</span>
+        </div>
+
+        <!-- Audio SFX Toggle -->
+        <button id="sfx-toggle" onclick="toggleSFX()" title="音效提示音" class="p-2.5 rounded-xl border border-zinc-800 bg-zinc-900/90 hover:bg-zinc-800 text-zinc-400 hover:text-brand-400 transition-all">
+          <i data-lucide="volume-2" class="w-4 h-4" id="sfx-icon"></i>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" onclick="toggleTheme()" title="切换色调" class="p-2.5 rounded-xl border border-zinc-800 bg-zinc-900/90 hover:bg-zinc-800 text-zinc-400 hover:text-amber-400 transition-all">
+          <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
+          <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
+        </button>
+
+        <!-- Export PDF -->
+        <button onclick="window.print()" class="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white font-semibold text-xs transition-all shadow-md shadow-brand-500/20 active:scale-95">
+          <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+          <span class="hidden sm:inline">导出 PDF</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+
+    <!-- BENTO GRID CONTAINERS SYSTEM -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+
+      <!-- ================= 1. HERO PROFILE CARD (Span 2x2 on LG) ================= -->
+      <div id="about" class="bento-card md:col-span-2 lg:col-span-2 p-6 sm:p-8 flex flex-col justify-between"
+           data-tilt data-tilt-max="4" data-tilt-speed="500" data-tilt-glare data-tilt-max-glare="0.1">
+        <div>
+          <div class="flex items-center gap-2 mb-4 text-xs font-bold uppercase tracking-widest text-sky-300" style="text-shadow: 0 0 12px rgba(125,211,252,0.5)">
+            <span class="w-1 h-4 rounded-full bg-sky-300 shadow-[0_0_8px_rgba(125,211,252,0.7)]"></span>
+            关于我
+          </div>
+          <!-- Tag Pills Header -->
+          <div class="flex flex-wrap items-center gap-2 mb-4">
+            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-brand-500/10 text-brand-400 border border-brand-500/30 flex items-center gap-1.5 shadow-sm">
+              <span class="w-2 h-2 rounded-full bg-brand-400 animate-ping"></span>
+              共青团员
+            </span>
+            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-purple-500/10 text-purple-300 border border-purple-500/30">
+              安阳学院 · 计算机科学与技术
+            </span>
+            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center gap-1">
+              <i data-lucide="car" class="w-3.5 h-3.5"></i> C2 驾照
+            </span>
+          </div>
+
+          <!-- Name & Shimmer Title -->
+          <h1 class="text-3xl sm:text-5xl font-black tracking-tight mb-3 text-white flex items-center gap-3">
+            <img src="logo.jpg" alt="头像" class="w-12 h-12 sm:w-16 sm:h-16 rounded-full object-cover border-2 border-brand-500/50 shadow-lg shadow-brand-500/20">
+            党培峰
+            <span class="text-xs px-3 py-1 rounded-xl bg-zinc-800/80 font-mono text-zinc-400 border border-zinc-700/60 font-normal">
+              He/Him
+            </span>
+          </h1>
+
+          <p class="text-sm sm:text-base font-bold shimmer-text mb-4">
+            计算机科学与技术 / 智能机器人开发 / AIGC 全栈应用 / 跨界艺术
+          </p>
+
+          <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-6 font-normal">
+            兼具<strong>计算机逻辑抽象力</strong>与<strong>跨界艺术审美感</strong>的复合型人才。专注 Python/C 算法基础与机器人避障规划；精通 Prompt 结构化工程与 AIGC 工具链搭建，实现<strong>高效数字化创作与自动化工作流范式</strong>；持有钢琴（上音）与舞蹈最高级（十级）认证及国美绘画一等奖，兼具极佳体能、抗压韧性与团队组织统筹才能。
+          </p>
+        </div>
+
+        <!-- Quick Contacts & Interactive Buttons -->
+        <div class="pt-4 border-t border-zinc-800/80 flex flex-wrap items-center justify-between gap-3">
+          <div class="flex flex-wrap items-center gap-2">
+            <!-- Phone Call Button -->
+            <a href="tel:19836649377" onclick="playClickSFX()" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold text-xs transition-all shadow-lg shadow-brand-600/30 active:scale-95">
+              <i data-lucide="phone-call" class="w-4 h-4"></i>
+              19836649377
+            </a>
+
+            <!-- Copy Email Button -->
+            <button id="copy-email-btn" onclick="copyEmail()" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-200 font-medium text-xs transition-all border border-zinc-700/80 active:scale-95">
+              <i data-lucide="copy" class="w-4 h-4 text-brand-400"></i>
+              <span id="email-label">复制联系邮箱</span>
+            </button>
+
+            <!-- Play Voice Intro -->
+            <button onclick="playAudioIntro()" class="inline-flex items-center gap-1.5 px-3 py-2.5 rounded-xl bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 font-medium text-xs transition-all border border-purple-500/30">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+              <span>声音向导</span>
+            </button>
+          </div>
+
+          <div class="text-xs text-zinc-400 flex items-center gap-1.5 font-mono">
+            <i data-lucide="map-pin" class="w-3.5 h-3.5 text-brand-400"></i>
+            <span>意向城市：全国 / 远程工作</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= 2. AI ASSISTANT TERMINAL CARD (Span 2 Cols) ================= -->
+      <div id="ai-assistant" class="bento-card md:col-span-2 p-6 flex flex-col justify-between bg-gradient-to-br from-zinc-900/90 via-zinc-950/90 to-brand-950/30"
+           data-tilt data-tilt-max="3" data-tilt-speed="400">
+        <div>
+          <div class="flex items-center gap-2 mb-3 text-xs font-bold uppercase tracking-widest text-sky-300" style="text-shadow: 0 0 12px rgba(125,211,252,0.5)">
+            <span class="w-1 h-4 rounded-full bg-sky-300 shadow-[0_0_8px_rgba(125,211,252,0.7)]"></span>
+            AI 互动问答
+          </div>
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <div class="p-2 rounded-xl bg-brand-500/10 text-brand-400 border border-brand-500/20">
+                <i data-lucide="bot-message-square" class="w-4 h-4"></i>
+              </div>
+              <h3 class="text-sm font-extrabold text-white tracking-wide">党培峰 AI 交互代理 (Ask Peifeng AI)</h3>
+            </div>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-brand-500/20 text-brand-300 border border-brand-500/30">
+              GPT-4o Protocol
+            </span>
+          </div>
+
+          <!-- Chat Screen Box -->
+          <div id="ai-chat-screen" class="w-full h-36 bg-zinc-950/90 rounded-2xl border border-zinc-800 p-3.5 font-mono text-xs overflow-y-auto space-y-2.5 shadow-inner">
+            <div class="text-zinc-400 flex items-start gap-2">
+              <span class="text-brand-400 font-bold">[AI]:</span>
+              <span>你好！我是党培峰的 AI 数字孪生。点击下方预设问题，随时与我对话交流！</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Preset Quick Questions -->
+        <div class="mt-3">
+          <div class="text-[10px] text-zinc-500 font-mono mb-2 flex justify-between">
+            <span>快捷问答提示词 (Quick Prompts):</span>
+            <span id="typing-status" class="text-brand-400">在线就绪</span>
+          </div>
+          <div class="grid grid-cols-2 gap-1.5 text-xs">
+            <button onclick="askAI('why_hire')" class="px-2.5 py-1.5 rounded-xl bg-zinc-900 hover:bg-brand-600/30 hover:border-brand-500/50 text-zinc-300 text-left border border-zinc-800 transition-all truncate flex items-center gap-1.5">
+              <i data-lucide="help-circle" class="w-3 h-3 text-brand-400 shrink-0"></i>
+              <span>为什么录用他？核心优势</span>
+            </button>
+            <button onclick="askAI('aigc_skills')" class="px-2.5 py-1.5 rounded-xl bg-zinc-900 hover:bg-brand-600/30 hover:border-brand-500/50 text-zinc-300 text-left border border-zinc-800 transition-all truncate flex items-center gap-1.5">
+              <i data-lucide="wand-2" class="w-3 h-3 text-purple-400 shrink-0"></i>
+              <span>如何运用 AIGC 大幅提升效率？</span>
+            </button>
+            <button onclick="askAI('robot_exp')" class="px-2.5 py-1.5 rounded-xl bg-zinc-900 hover:bg-brand-600/30 hover:border-brand-500/50 text-zinc-300 text-left border border-zinc-800 transition-all truncate flex items-center gap-1.5">
+              <i data-lucide="cpu" class="w-3.5 h-3.5 text-emerald-400 shrink-0"></i>
+              <span>机器人大赛的技术细节？</span>
+            </button>
+            <button onclick="askAI('arts_bg')" class="px-2.5 py-1.5 rounded-xl bg-zinc-900 hover:bg-brand-600/30 hover:border-brand-500/50 text-zinc-300 text-left border border-zinc-800 transition-all truncate flex items-center gap-1.5">
+              <i data-lucide="music" class="w-3 h-3 text-amber-400 shrink-0"></i>
+              <span>双十级跨界艺术背景？</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= 3. PIANO SYNTH & AUDIO EQUALIZER (Span 2 Cols) ================= -->
+      <div id="piano-lab" class="bento-card md:col-span-2 p-6 flex flex-col justify-between bg-gradient-to-br from-zinc-900/90 via-zinc-950/90 to-amber-950/20"
+           data-tilt data-tilt-max="3" data-tilt-speed="400">
+        <div>
+          <div class="flex items-center gap-2 mb-2 text-xs font-bold uppercase tracking-widest text-yellow-300" style="text-shadow: 0 0 12px rgba(253,224,71,0.5)">
+            <span class="w-1 h-4 rounded-full bg-yellow-300 shadow-[0_0_8px_rgba(253,224,71,0.7)]"></span>
+            音乐实验室
+          </div>
+          <div class="flex items-center justify-between mb-2">
+            <div class="flex items-center gap-2">
+              <div class="p-2 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                <i data-lucide="music" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <h3 class="text-sm font-extrabold text-white">上海音乐学院 钢琴十级 · 极客微型合成器</h3>
+              </div>
+            </div>
+
+            <!-- Demo Player Selector -->
+            <div class="flex items-center gap-1.5">
+              <button onclick="playSong('canon')" class="px-2.5 py-1 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[11px] font-mono transition-all flex items-center gap-1">
+                <i data-lucide="play" class="w-3 h-3"></i> 试听《卡农》
+              </button>
+              <button onclick="stopSong()" class="px-2 py-1 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-400 text-[11px] font-mono">
+                停止
+              </button>
+            </div>
+          </div>
+
+          <p class="text-xs text-zinc-400 mb-3">
+            支持点击或键盘 [1-7] 弹奏。结合 Web Audio API 实时合成与 Canvas 频域波形渲染：
+          </p>
+
+          <!-- Waveform Visualizer Canvas -->
+          <div class="relative w-full h-12 bg-zinc-950/80 rounded-xl border border-zinc-800/80 overflow-hidden mb-3">
+            <canvas id="equalizer-canvas" class="w-full h-full"></canvas>
+          </div>
+
+          <!-- Interactive Keyboard Keys -->
+          <div class="grid grid-cols-7 gap-1.5 bg-zinc-950 p-2 rounded-2xl border border-zinc-800/90 shadow-inner">
+            <button onclick="playPianoKey(261.63, 'C4', '1')" id="key-1" class="piano-key h-20 rounded-xl bg-zinc-100 text-zinc-900 font-black text-xs flex flex-col justify-end items-center pb-2 hover:bg-amber-100 shadow">
+              <span>Do</span><span class="text-[9px] text-zinc-400 font-mono">1</span>
+            </button>
+            <button onclick="playPianoKey(293.66, 'D4', '2')" id="key-2" class="piano-key h-20 rounded-xl bg-zinc-100 text-zinc-900 font-black text-xs flex flex-col justify-end items-center pb-2 hover:bg-amber-100 shadow">
+              <span>Re</span><span class="text-[9px] text-zinc-400 font-mono">2</span>
+            </button>
+            <button onclick="playPianoKey(329.63, 'E4', '3')" id="key-3" class="piano-key h-20 rounded-xl bg-zinc-100 text-zinc-900 font-black text-xs flex flex-col justify-end items-center pb-2 hover:bg-amber-100 shadow">
+              <span>Mi</span><span class="text-[9px] text-zinc-400 font-mono">3</span>
+            </button>
+            <button onclick="playPianoKey(349.23, 'F4', '4')" id="key-4" class="piano-key h-20 rounded-xl bg-zinc-100 text-zinc-900 font-black text-xs flex flex-col justify-end items-center pb-2 hover:bg-amber-100 shadow">
+              <span>Fa</span><span class="text-[9px] text-zinc-400 font-mono">4</span>
+            </button>
+            <button onclick="playPianoKey(392.00, 'G4', '5')" id="key-5" class="piano-key h-20 rounded-xl bg-zinc-100 text-zinc-900 font-black text-xs flex flex-col justify-end items-center pb-2 hover:bg-amber-100 shadow">
+              <span>Sol</span><span class="text-[9px] text-zinc-400 font-mono">5</span>
+            </button>
+            <button onclick="playPianoKey(440.00, 'A4', '6')" id="key-6" class="piano-key h-20 rounded-xl bg-zinc-100 text-zinc-900 font-black text-xs flex flex-col justify-end items-center pb-2 hover:bg-amber-100 shadow">
+              <span>La</span><span class="text-[9px] text-zinc-400 font-mono">6</span>
+            </button>
+            <button onclick="playPianoKey(493.88, 'B4', '7')" id="key-7" class="piano-key h-20 rounded-xl bg-zinc-100 text-zinc-900 font-black text-xs flex flex-col justify-end items-center pb-2 hover:bg-amber-100 shadow">
+              <span>Si</span><span class="text-[9px] text-zinc-400 font-mono">7</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between text-[11px] text-zinc-500 mt-3 pt-2 border-t border-zinc-800/80 font-mono">
+          <span id="piano-key-display">当前按键：等待试弹...</span>
+          <span class="text-amber-400">Web Synth Frequency Modulation</span>
+        </div>
+      </div>
+
+      <!-- ================= 4. ROBOT PATHFINDING SIMULATOR (Span 2 Cols) ================= -->
+      <div id="robot-lab" class="bento-card md:col-span-2 p-6 flex flex-col justify-between bg-gradient-to-br from-zinc-900/90 via-zinc-950/90 to-emerald-950/20"
+           data-tilt data-tilt-max="3" data-tilt-speed="400">
+        <div>
+          <div class="flex items-center gap-2 mb-2 text-xs font-bold uppercase tracking-widest text-emerald-300" style="text-shadow: 0 0 12px rgba(110,231,183,0.5)">
+            <span class="w-1 h-4 rounded-full bg-emerald-300 shadow-[0_0_8px_rgba(110,231,183,0.7)]"></span>
+            机器人避障
+          </div>
+          <div class="flex items-center justify-between mb-2">
+            <div class="flex items-center gap-2">
+              <div class="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                <i data-lucide="bot" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <h3 class="text-sm font-extrabold text-white">机器人避障算法实战 (+30% 精度优化)</h3>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button onclick="resetRobotCanvas()" class="px-2.5 py-1 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-emerald-400 border border-zinc-700/80 text-[11px] font-mono transition-all">
+                清空障碍物
+              </button>
+            </div>
+          </div>
+
+          <p class="text-xs text-zinc-400 mb-2">
+            <strong class="text-emerald-400">交互指引：</strong>在下方画布上点击放置/清除障碍物 (红色)，机器人 (绿色) 将通过向量场算法实时重新计算最佳路线！
+          </p>
+
+          <!-- Robot Canvas Board -->
+          <div class="relative w-full h-32 bg-zinc-950/90 rounded-2xl border border-zinc-800 overflow-hidden cursor-crosshair">
+            <canvas id="robot-canvas" class="w-full h-full"></canvas>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between text-[11px] text-zinc-400 mt-2 pt-2 border-t border-zinc-800/80 font-mono">
+          <span class="text-emerald-400">Vector Obstacle Field Algorithm</span>
+          <span id="obstacle-count">障碍物数: 3 | 状态: 路径最优</span>
+        </div>
+      </div>
+
+      <!-- ================= 5. AIGC BENCHMARK STAT CARD (Span 1 on MD, 2 on LG - 并列) ================= -->
+      <div class="bento-card md:col-span-1 lg:col-span-2 p-6 flex flex-col justify-between bg-gradient-to-br from-zinc-900/90 via-brand-950/40 to-purple-950/30"
+           data-tilt data-tilt-max="6" data-tilt-speed="400">
+        <div class="flex items-center justify-between text-zinc-400">
+          <span class="text-xs font-bold uppercase tracking-wider font-mono text-brand-400">AIGC 提效模型</span>
+          <div class="p-2 rounded-xl bg-brand-500/10 text-brand-400 border border-brand-500/20">
+            <i data-lucide="zap" class="w-4 h-4"></i>
+          </div>
+        </div>
+
+        <div class="my-4">
+          <div class="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-brand-400 via-indigo-300 to-cyber-pink font-mono tracking-tight">
+            3x+
+          </div>
+          <p class="text-xs text-zinc-200 font-bold mt-1.5">数字化创作与工作流综合提效</p>
+        </div>
+
+        <div class="text-[11px] text-zinc-400 border-t border-zinc-800/80 pt-2.5 space-y-1">
+          <div class="flex justify-between">
+            <span>Prompt 结构化提炼</span>
+            <span class="text-brand-400 font-mono">10x 速度</span>
+          </div>
+          <div class="flex justify-between">
+            <span>AI 演示文档设计</span>
+            <span class="text-brand-400 font-mono">高质准时</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= 6. DUAL LEVEL 10 ARTS CARD (Span 1 on MD, 2 on LG - 并列) ================= -->
+      <div class="bento-card md:col-span-1 lg:col-span-2 p-6 flex flex-col justify-between bg-gradient-to-br from-zinc-900/90 via-purple-950/40 to-cyber-pink/20"
+           data-tilt data-tilt-max="6" data-tilt-speed="400">
+        <div class="flex items-center justify-between text-zinc-400">
+          <span class="text-xs font-bold uppercase tracking-wider font-mono text-purple-400">跨界艺术巅峰</span>
+          <div class="p-2 rounded-xl bg-purple-500/10 text-purple-400 border border-purple-500/20">
+            <i data-lucide="award" class="w-4 h-4"></i>
+          </div>
+        </div>
+
+        <div class="my-4">
+          <div class="text-4xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyber-pink font-sans">
+            双10级
+          </div>
+          <p class="text-xs text-zinc-200 font-bold mt-1.5">上音钢琴十级 + 舞蹈最高级</p>
+        </div>
+
+        <div class="text-[11px] text-zinc-400 border-t border-zinc-800/80 pt-2.5 space-y-1">
+          <div class="flex justify-between">
+            <span>国美绘画比赛</span>
+            <span class="text-purple-300 font-semibold">一等奖</span>
+          </div>
+          <div class="flex justify-between">
+            <span>硬笔/软笔书法</span>
+            <span class="text-purple-300 font-semibold">深厚功底</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= 7. FEATURED PROJECT 1: AIGC CREATION (Span 2 Cols) ================= -->
+      <div id="projects" class="bento-card md:col-span-2 p-6 sm:p-8 flex flex-col justify-between"
+           data-tilt data-tilt-max="3" data-tilt-speed="400">
+        <div>
+          <div class="flex items-center gap-2 mb-3 text-xs font-bold uppercase tracking-widest text-sky-300" style="text-shadow: 0 0 12px rgba(125,211,252,0.5)">
+            <span class="w-1 h-4 rounded-full bg-sky-300 shadow-[0_0_8px_rgba(125,211,252,0.7)]"></span>
+            核心项目
+          </div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold px-3 py-1 rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/30 flex items-center gap-1.5">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> 独立开发者 & 数字化创作
+            </span>
+            <span class="text-xs text-zinc-500 font-mono">2025.09 - 2026.08</span>
+          </div>
+
+          <h3 class="text-xl font-bold text-white mb-2 flex items-center justify-between">
+            <span>AIGC 数字化创作与轻量应用开发</span>
+            <button onclick="openModal('modal-aigc')" class="text-xs text-brand-400 hover:text-brand-300 font-normal flex items-center gap-1">
+              查看深度解构 <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </button>
+          </h3>
+
+          <p class="text-xs text-zinc-400 mb-4">
+            <strong class="text-zinc-200">应用目标：</strong>将 LLM 生成能力融入演示文稿排版、轻量游戏代码生成与音乐后制，打造极速高效的多模态创作链路。
+          </p>
+
+          <div class="space-y-2.5 text-xs text-zinc-300 mb-6">
+            <div class="flex items-start gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-400 shrink-0 mt-0.5"></i>
+              <span><strong>AI+演示设计：</strong>熟练提炼 Prompt 结构，结合 AI 视觉与排版工具，实现高质量 PPT 极速产出。</span>
+            </div>
+            <div class="flex items-start gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-400 shrink-0 mt-0.5"></i>
+              <span><strong>AI+游戏原型：</strong>借助 Python 与 AI 编程助手，独立完成轻量级交互小游戏（如贪吃蛇、文字解谜）的代码逻辑调试。</span>
+            </div>
+            <div class="flex items-start gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-400 shrink-0 mt-0.5"></i>
+              <span><strong>AI+音频合成：</strong>基于钢琴编曲感知，运用 AI 音乐工具进行词曲创意、风格调校与音频片段合成。</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-2 pt-3 border-t border-zinc-800/80">
+          <span class="px-2.5 py-1 rounded-lg bg-zinc-900 text-zinc-300 text-xs font-mono border border-zinc-800">Python</span>
+          <span class="px-2.5 py-1 rounded-lg bg-zinc-900 text-zinc-300 text-xs font-mono border border-zinc-800">Prompt 工程</span>
+          <span class="px-2.5 py-1 rounded-lg bg-zinc-900 text-zinc-300 text-xs font-mono border border-zinc-800">多模态 AIGC</span>
+          <span class="px-2.5 py-1 rounded-lg bg-zinc-900 text-zinc-300 text-xs font-mono border border-zinc-800">轻量级原型</span>
+        </div>
+      </div>
+
+      <!-- ================= 8. FEATURED PROJECT 2: ROBOTICS (Span 2 Cols) ================= -->
+      <div class="bento-card md:col-span-2 p-6 sm:p-8 flex flex-col justify-between"
+           data-tilt data-tilt-max="3" data-tilt-speed="400">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center gap-1.5">
+              <i data-lucide="cpu" class="w-3.5 h-3.5"></i> 核心队员 (调参 & 逻辑控制)
+            </span>
+            <span class="text-xs text-zinc-500 font-mono">2025.10 - 2026.04</span>
+          </div>
+
+          <h3 class="text-xl font-bold text-white mb-2 flex items-center justify-between">
+            <span>机器人技术应用与创新大赛</span>
+            <button onclick="openModal('modal-robot')" class="text-xs text-emerald-400 hover:text-emerald-300 font-normal flex items-center gap-1">
+              查看深度解构 <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </button>
+          </h3>
+
+          <p class="text-xs text-zinc-400 mb-4">
+            <strong class="text-zinc-200">应用目标：</strong>针对服务/工业场景，组建 5 人团队参加科创赛事，负责硬件驱动对接与实时避障算法调优。
+          </p>
+
+          <div class="space-y-2.5 text-xs text-zinc-300 mb-6">
+            <div class="flex items-start gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+              <span>配合团队完成驱动模块与传感器的软硬件对接，使用 Python/C 编写并优化避障与路径规划逻辑；进行 30+ 组迭代仿真与现场实测。</span>
+            </div>
+            <div class="flex items-start gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+              <span>优化机器人在复杂障碍环境下的响应时延，<strong>路径避障精准度提升 30%</strong>，协助团队斩获科技创新荣誉。</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-2 pt-3 border-t border-zinc-800/80">
+          <span class="px-2.5 py-1 rounded-lg bg-zinc-900 text-zinc-300 text-xs font-mono border border-zinc-800">Python / C 语言</span>
+          <span class="px-2.5 py-1 rounded-lg bg-zinc-900 text-zinc-300 text-xs font-mono border border-zinc-800">传感器调参</span>
+          <span class="px-2.5 py-1 rounded-lg bg-zinc-900 text-zinc-300 text-xs font-mono border border-zinc-800">避障路径规划</span>
+          <span class="px-2.5 py-1 rounded-lg bg-zinc-900 text-zinc-300 text-xs font-mono border border-zinc-800">软硬件协同</span>
+        </div>
+      </div>
+
+      <!-- ================= 9. DYNAMIC SKILLS MATRIX (Span 4 Cols) ================= -->
+      <div id="skills" class="bento-card md:col-span-2 lg:col-span-4 p-6 sm:p-8"
+           data-tilt data-tilt-max="1" data-tilt-speed="400">
+        <div class="flex items-center gap-2 mb-4 text-xs font-bold uppercase tracking-widest text-sky-300" style="text-shadow: 0 0 12px rgba(125,211,252,0.5)">
+          <span class="w-1 h-4 rounded-full bg-sky-300 shadow-[0_0_8px_rgba(125,211,252,0.7)]"></span>
+          技能矩阵
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div>
+            <h2 class="text-2xl font-black text-white flex items-center gap-2">
+              <i data-lucide="layers" class="w-6 h-6 text-brand-400"></i>
+              专业技能与综合素养矩阵
+            </h2>
+            <p class="text-xs text-zinc-400 mt-1">跨领域的计算机编程、AIGC 生产力与艺术修养</p>
+          </div>
+
+          <!-- Skill Category Filters -->
+          <div class="flex flex-wrap gap-1.5 bg-zinc-950 p-1.5 rounded-2xl border border-zinc-800 text-xs" id="skills-filter">
+            <button onclick="filterSkills('all')" class="skill-tab-btn active px-3.5 py-1.5 rounded-xl font-bold bg-brand-600 text-white transition-all">全部技能</button>
+            <button onclick="filterSkills('coding')" class="skill-tab-btn px-3.5 py-1.5 rounded-xl text-zinc-400 hover:text-white transition-all">编程开发</button>
+            <button onclick="filterSkills('aigc')" class="skill-tab-btn px-3.5 py-1.5 rounded-xl text-zinc-400 hover:text-white transition-all">AIGC 提效</button>
+            <button onclick="filterSkills('robot')" class="skill-tab-btn px-3.5 py-1.5 rounded-xl text-zinc-400 hover:text-white transition-all">机器人</button>
+            <button onclick="filterSkills('arts')" class="skill-tab-btn px-3.5 py-1.5 rounded-xl text-zinc-400 hover:text-white transition-all">艺术与体能</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="skills-grid">
+          
+          <!-- Coding -->
+          <div class="skill-card p-4 rounded-2xl bg-zinc-950/70 border border-zinc-800/80 hover:border-brand-500/40 transition-all" data-category="coding">
+            <div class="text-xs font-bold text-brand-400 mb-3 flex items-center gap-1.5 font-mono">
+              <i data-lucide="code-2" class="w-4 h-4"></i> 编程与算法基础
+            </div>
+            <div class="space-y-3">
+              <div>
+                <div class="flex justify-between text-xs text-zinc-300 mb-1">
+                  <span>Python / C 语法与核心逻辑</span>
+                  <span class="text-brand-400 font-mono font-bold">88%</span>
+                </div>
+                <div class="w-full h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                  <div class="h-full bg-brand-500 rounded-full transition-all duration-1000" style="width: 88%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs text-zinc-300 mb-1">
+                  <span>数据结构导论 & 逻辑调试</span>
+                  <span class="text-brand-400 font-mono font-bold">82%</span>
+                </div>
+                <div class="w-full h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                  <div class="h-full bg-brand-500 rounded-full transition-all duration-1000" style="width: 82%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AIGC -->
+          <div class="skill-card p-4 rounded-2xl bg-zinc-950/70 border border-zinc-800/80 hover:border-purple-500/40 transition-all" data-category="aigc">
+            <div class="text-xs font-bold text-purple-400 mb-3 flex items-center gap-1.5 font-mono">
+              <i data-lucide="wand-2" class="w-4 h-4"></i> AIGC 与高效生产力
+            </div>
+            <div class="space-y-3">
+              <div>
+                <div class="flex justify-between text-xs text-zinc-300 mb-1">
+                  <span>Prompt 结构化工程 & 交互</span>
+                  <span class="text-purple-400 font-mono font-bold">95%</span>
+                </div>
+                <div class="w-full h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                  <div class="h-full bg-purple-500 rounded-full transition-all duration-1000" style="width: 95%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs text-zinc-300 mb-1">
+                  <span>AI 赋能 PPT 快速制作与排版</span>
+                  <span class="text-purple-400 font-mono font-bold">95%</span>
+                </div>
+                <div class="w-full h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                  <div class="h-full bg-purple-500 rounded-full transition-all duration-1000" style="width: 95%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs text-zinc-300 mb-1">
+                  <span>AI 辅助轻量原型与多模态创作</span>
+                  <span class="text-purple-400 font-mono font-bold">90%</span>
+                </div>
+                <div class="w-full h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                  <div class="h-full bg-purple-500 rounded-full transition-all duration-1000" style="width: 90%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Robotics -->
+          <div class="skill-card p-4 rounded-2xl bg-zinc-950/70 border border-zinc-800/80 hover:border-emerald-500/40 transition-all" data-category="robot">
+            <div class="text-xs font-bold text-emerald-400 mb-3 flex items-center gap-1.5 font-mono">
+              <i data-lucide="bot" class="w-4 h-4"></i> 机器人与硬件控制
+            </div>
+            <div class="space-y-3">
+              <div>
+                <div class="flex justify-between text-xs text-zinc-300 mb-1">
+                  <span>机器人系统架构与传感控制</span>
+                  <span class="text-emerald-400 font-mono font-bold">80%</span>
+                </div>
+                <div class="w-full h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                  <div class="h-full bg-emerald-500 rounded-full transition-all duration-1000" style="width: 80%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs text-zinc-300 mb-1">
+                  <span>硬件调参、避障与路径优化</span>
+                  <span class="text-emerald-400 font-mono font-bold">85%</span>
+                </div>
+                <div class="w-full h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                  <div class="h-full bg-emerald-500 rounded-full transition-all duration-1000" style="width: 85%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Arts & Leadership -->
+          <div class="skill-card p-4 rounded-2xl bg-zinc-950/70 border border-zinc-800/80 hover:border-amber-500/40 transition-all" data-category="arts">
+            <div class="text-xs font-bold text-amber-400 mb-3 flex items-center gap-1.5 font-mono">
+              <i data-lucide="palette" class="w-4 h-4"></i> 跨界艺术与体能素质
+            </div>
+            <div class="space-y-3">
+              <div>
+                <div class="flex justify-between text-xs text-zinc-300 mb-1">
+                  <span>钢琴 (上音十级) & 舞蹈 (十级)</span>
+                  <span class="text-amber-400 font-mono font-bold">96%</span>
+                </div>
+                <div class="w-full h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                  <div class="h-full bg-amber-500 rounded-full transition-all duration-1000" style="width: 96%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs text-zinc-300 mb-1">
+                  <span>绘画 (国美一等奖) & 书法功底</span>
+                  <span class="text-amber-400 font-mono font-bold">92%</span>
+                </div>
+                <div class="w-full h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                  <div class="h-full bg-amber-500 rounded-full transition-all duration-1000" style="width: 92%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs text-zinc-300 mb-1">
+                  <span>中长跑体能、抗压与组织调度</span>
+                  <span class="text-amber-400 font-mono font-bold">94%</span>
+                </div>
+                <div class="w-full h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                  <div class="h-full bg-amber-500 rounded-full transition-all duration-1000" style="width: 94%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ================= 10. STAGE PERFORMANCE (Span 2 Cols) ================= -->
+      <div class="bento-card md:col-span-2 p-6 sm:p-8 flex flex-col justify-between"
+           data-tilt data-tilt-max="3" data-tilt-speed="400">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold px-3 py-1 rounded-full bg-cyber-pink/10 text-cyber-pink border border-cyber-pink/30 flex items-center gap-1.5">
+              <i data-lucide="video" class="w-3.5 h-3.5"></i> 演艺主创 & 现场协调
+            </span>
+            <span class="text-xs text-zinc-500 font-mono">2026.06 - 2026.08</span>
+          </div>
+
+          <h3 class="text-xl font-bold text-white mb-2">
+            爵士 Hip-hop 演艺项目与商业 MV 录制
+          </h3>
+
+          <p class="text-xs text-zinc-400 mb-4">
+            <strong class="text-zinc-200">应用目标：</strong>毕业假期进行高强度爵士/Hip-hop 舞蹈集训，两周内高效交付高质量 MV 录制与线下舞台演出。
+          </p>
+
+          <div class="space-y-2.5 text-xs text-zinc-300 mb-6">
+            <div class="flex items-start gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-cyber-pink shrink-0 mt-0.5"></i>
+              <span>每日进行 6+ 小时高强度跨舞种集训，克服技术瓶颈；主动承担现场节拍调度、队形编排沟通及后勤协调。</span>
+            </div>
+            <div class="flex items-start gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-cyber-pink shrink-0 mt-0.5"></i>
+              <span>高质量完成 1 首主打曲 MV 官方拍摄与后制交付，线下演出零失误，得到编导与观众的高度评价。</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-2 pt-3 border-t border-zinc-800/80">
+          <span class="px-2.5 py-1 rounded-lg bg-zinc-900 text-zinc-300 text-xs font-mono border border-zinc-800">舞台调度</span>
+          <span class="px-2.5 py-1 rounded-lg bg-zinc-900 text-zinc-300 text-xs font-mono border border-zinc-800">跨界演艺</span>
+          <span class="px-2.5 py-1 rounded-lg bg-zinc-900 text-zinc-300 text-xs font-mono border border-zinc-800">高压执行</span>
+        </div>
+      </div>
+
+      <!-- ================= 11. CAMPUS LEADERSHIP (Span 2 Cols) ================= -->
+      <div id="experience" class="bento-card md:col-span-2 p-6 sm:p-8 flex flex-col justify-between"
+           data-tilt data-tilt-max="3" data-tilt-speed="400">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/30 flex items-center gap-1.5">
+              <i data-lucide="users" class="w-3.5 h-3.5"></i> 班长 / 团支书 / 纪律委员
+            </span>
+            <span class="text-xs text-zinc-500 font-mono">2023.09 - 2026.06</span>
+          </div>
+
+          <h3 class="text-xl font-bold text-white mb-2">
+            高中班级管理委员会
+          </h3>
+
+          <div class="space-y-2.5 text-xs text-zinc-300 mb-6">
+            <div class="flex items-start gap-2">
+              <i data-lucide="shield-check" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
+              <span><strong>团队领导与团建：</strong>主持班级日常事务与团支部建设，统筹 15+ 场主题团日活动，班级团员活动参与率达 100%。</span>
+            </div>
+            <div class="flex items-start gap-2">
+              <i data-lucide="shield-check" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
+              <span><strong>纪律管理与风气塑造：</strong>建立自律考评机制，带领小组执行课堂督导，推动班级量化考核升至年级 Top 3%。</span>
+            </div>
+            <div class="flex items-start gap-2">
+              <i data-lucide="shield-check" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
+              <span><strong>师生桥梁与资源协调：</strong>担任 8 门学科任课教师与 50+ 名同学的核心沟通枢纽，多次荣获“优秀班干部”等称号。</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-2 pt-3 border-t border-zinc-800/80">
+          <span class="px-2.5 py-1 rounded-lg bg-zinc-900 text-zinc-300 text-xs font-mono border border-zinc-800">团队领导力</span>
+          <span class="px-2.5 py-1 rounded-lg bg-zinc-900 text-zinc-300 text-xs font-mono border border-zinc-800">活动策划</span>
+          <span class="px-2.5 py-1 rounded-lg bg-zinc-900 text-zinc-300 text-xs font-mono border border-zinc-800">沟通协调</span>
+        </div>
+      </div>
+
+      <!-- ================= 12. EDUCATION & CERTIFICATES (Span 4 Cols) ================= -->
+      <div id="education" class="bento-card md:col-span-2 lg:col-span-4 p-6 sm:p-8"
+           data-tilt data-tilt-max="1" data-tilt-speed="400">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          
+          <!-- Education Column -->
+          <div class="lg:col-span-1 border-b lg:border-b-0 lg:border-r border-zinc-800/80 pb-6 lg:pb-0 lg:pr-6">
+            <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+              <i data-lucide="graduation-cap" class="w-5 h-5 text-brand-400"></i>
+              教育背景
+            </h2>
+
+            <div class="p-4 rounded-2xl bg-zinc-950/80 border border-zinc-800 shadow-sm">
+              <div class="flex items-center justify-between mb-2">
+                <span class="font-extrabold text-base text-white">安阳学院</span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/30 font-mono">准大一</span>
+              </div>
+              <div class="text-xs text-brand-400 font-semibold mb-1">计算机科学与技术 | 本科</div>
+              <div class="text-[11px] text-zinc-500 font-mono mb-4">2026.09 - 2030.06（预计）</div>
+
+              <div class="space-y-2 text-xs text-zinc-300">
+                <p><strong>学业表现：</strong>高中阶段综合成绩名列前茅，多次获得校级优秀学生干部荣誉。</p>
+                <p><strong>自主前置学习：</strong>自主通读 Python 编程基础与 C 语言核心逻辑，具备初步算法设计与调试思维。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Certifications Grid Column -->
+          <div class="lg:col-span-2">
+            <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+              <i data-lucide="trophy" class="w-5 h-5 text-amber-400"></i>
+              获奖与专业等级证书
+            </h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <!-- Cert 1 -->
+              <div class="p-3.5 rounded-2xl bg-zinc-950/80 border border-zinc-800/80 flex items-start gap-3 hover:border-purple-500/40 transition-colors">
+                <div class="p-2 rounded-xl bg-purple-500/10 text-purple-400 shrink-0">
+                  <i data-lucide="music" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-white">上海音乐学院 钢琴十级证书</div>
+                  <div class="text-[11px] text-purple-400 font-medium">专业等级认证 (最高级)</div>
+                </div>
+              </div>
+
+              <!-- Cert 2 -->
+              <div class="p-3.5 rounded-2xl bg-zinc-950/80 border border-zinc-800/80 flex items-start gap-3 hover:border-purple-500/40 transition-colors">
+                <div class="p-2 rounded-xl bg-purple-500/10 text-purple-400 shrink-0">
+                  <i data-lucide="activity" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-white">中国舞蹈家协会 舞蹈十级证书</div>
+                  <div class="text-[11px] text-purple-400 font-medium">专业等级认证 (最高级)</div>
+                </div>
+              </div>
+
+              <!-- Cert 3 -->
+              <div class="p-3.5 rounded-2xl bg-zinc-950/80 border border-zinc-800/80 flex items-start gap-3 hover:border-amber-500/40 transition-colors">
+                <div class="p-2 rounded-xl bg-amber-500/10 text-amber-400 shrink-0">
+                  <i data-lucide="palette" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-white">中国美术学院绘画比赛 一等奖</div>
+                  <div class="text-[11px] text-amber-400 font-medium">国家级绘画荣誉</div>
+                </div>
+              </div>
+
+              <!-- Cert 4 -->
+              <div class="p-3.5 rounded-2xl bg-zinc-950/80 border border-zinc-800/80 flex items-start gap-3 hover:border-brand-500/40 transition-colors">
+                <div class="p-2 rounded-xl bg-brand-500/10 text-brand-400 shrink-0">
+                  <i data-lucide="award" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-white">校级“优秀班干部”与“最受欢迎学生”</div>
+                  <div class="text-[11px] text-brand-400 font-medium">连续多次荣誉表彰</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    <!-- ================= AI证书展示台 ================= -->
+      <div id="ai-certificates" class="bento-card md:col-span-2 lg:col-span-4 p-6 sm:p-8"
+           data-tilt data-tilt-max="1" data-tilt-speed="400">
+        <div class="flex items-center gap-2 mb-4 text-xs font-bold uppercase tracking-widest text-yellow-300" style="text-shadow: 0 0 12px rgba(253,224,71,0.5)">
+          <span class="w-1 h-4 rounded-full bg-yellow-300 shadow-[0_0_8px_rgba(253,224,71,0.7)]"></span>
+          AI证书展示台
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div>
+            <h2 class="text-2xl font-black text-white flex items-center gap-2">
+              <i data-lucide="badge-check" class="w-6 h-6 text-amber-400"></i>
+              AI 证书展示台
+            </h2>
+            <p class="text-xs text-zinc-400 mt-1">阿里云 &amp; AI 大学堂专项认证资质</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+          <!-- 证书1: 阿里云专项认证 -->
+          <div class="group relative rounded-2xl overflow-hidden bg-zinc-950/80 border border-zinc-800/80 hover:border-brand-500/50 transition-all cursor-pointer"
+               onclick="openCertLightbox('阿里云专项认证.png', '阿里云专项认证')">
+            <div class="aspect-[3/4] overflow-hidden">
+              <img src="阿里云专项认证.png" alt="阿里云专项认证" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+              <span class="text-xs font-bold text-white">阿里云专项认证</span>
+            </div>
+          </div>
+
+          <!-- 证书2: 人工智能 -->
+          <div class="group relative rounded-2xl overflow-hidden bg-zinc-950/80 border border-zinc-800/80 hover:border-brand-500/50 transition-all cursor-pointer"
+               onclick="openCertLightbox('人工智能.jpg', '人工智能认证')">
+            <div class="aspect-[3/4] overflow-hidden">
+              <img src="人工智能.jpg" alt="人工智能认证" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+              <span class="text-xs font-bold text-white">人工智能认证</span>
+            </div>
+          </div>
+
+          <!-- 证书3: Ai大学堂 -->
+          <div class="group relative rounded-2xl overflow-hidden bg-zinc-950/80 border border-zinc-800/80 hover:border-brand-500/50 transition-all cursor-pointer"
+               onclick="openCertLightbox('Ai大学堂.png', 'AI 大学堂认证')">
+            <div class="aspect-[3/4] overflow-hidden">
+              <img src="Ai大学堂.png" alt="AI 大学堂认证" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+              <span class="text-xs font-bold text-white">AI 大学堂认证</span>
+            </div>
+          </div>
+
+          <!-- 证书4: 1.png -->
+          <div class="group relative rounded-2xl overflow-hidden bg-zinc-950/80 border border-zinc-800/80 hover:border-brand-500/50 transition-all cursor-pointer"
+               onclick="openCertLightbox('1.png', 'AI 认证证书 (1)')">
+            <div class="aspect-[3/4] overflow-hidden">
+              <img src="1.png" alt="AI 认证证书 (1)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+              <span class="text-xs font-bold text-white">AI 认证证书 (1)</span>
+            </div>
+          </div>
+
+          <!-- 证书5: 2.jpg -->
+          <div class="group relative rounded-2xl overflow-hidden bg-zinc-950/80 border border-zinc-800/80 hover:border-brand-500/50 transition-all cursor-pointer"
+               onclick="openCertLightbox('2.jpg', 'AI 认证证书 (2)')">
+            <div class="aspect-[3/4] overflow-hidden">
+              <img src="2.jpg" alt="AI 认证证书 (2)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+              <span class="text-xs font-bold text-white">AI 认证证书 (2)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= 才艺展示栏目 ================= -->
+      <div id="talent-show" class="bento-card md:col-span-2 lg:col-span-4 p-6 sm:p-8"
+           data-tilt data-tilt-max="1" data-tilt-speed="400">
+        <div class="flex items-center gap-2 mb-4 text-xs font-bold uppercase tracking-widest text-yellow-300" style="text-shadow: 0 0 12px rgba(253,224,71,0.5)">
+          <span class="w-1 h-4 rounded-full bg-yellow-300 shadow-[0_0_8px_rgba(253,224,71,0.7)]"></span>
+          才艺展示栏目
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div>
+            <h2 class="text-2xl font-black text-white flex items-center gap-2">
+              <i data-lucide="music" class="w-6 h-6 text-amber-400"></i>
+              才艺展示栏目
+            </h2>
+            <p class="text-xs text-zinc-400 mt-1">个人钢琴演奏 · 原创音乐 · Hiphop</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- 视频1: 个人钢琴 -->
+          <div class="rounded-2xl overflow-hidden bg-zinc-950/90 border border-zinc-800/80">
+            <video controls class="w-full" poster="">
+              <source src="4.mp4" type="video/mp4">
+              您的浏览器不支持视频播放
+            </video>
+            <div class="px-4 py-3 border-t border-zinc-800/80 flex items-center gap-2">
+              <i data-lucide="piano" class="w-4 h-4 text-amber-400"></i>
+              <span class="text-sm text-zinc-300 font-medium">个人钢琴</span>
+            </div>
+          </div>
+
+          <!-- 视频2: 舔狗之歌 -->
+          <div class="rounded-2xl overflow-hidden bg-zinc-950/90 border border-zinc-800/80">
+            <video controls class="w-full" poster="">
+              <source src="5.mp4" type="video/mp4">
+              您的浏览器不支持视频播放
+            </video>
+            <div class="px-4 py-3 border-t border-zinc-800/80 flex items-center gap-2">
+              <i data-lucide="disc-3" class="w-4 h-4 text-amber-400"></i>
+              <span class="text-sm text-zinc-300 font-medium">花半小时写的舔狗之歌，谁听懂谁破防</span>
+              <span class="text-xs text-zinc-500">[偷笑][偷笑][偷笑]</span>
+            </div>
+          </div>
+
+          <!-- 视频3: Hiphop -->
+          <div class="rounded-2xl overflow-hidden bg-zinc-950/90 border border-zinc-800/80">
+            <video controls class="w-full" poster="">
+              <source src="6.mp4" type="video/mp4">
+              您的浏览器不支持视频播放
+            </video>
+            <div class="px-4 py-3 border-t border-zinc-800/80 flex items-center gap-2">
+              <i data-lucide="music-2" class="w-4 h-4 text-amber-400"></i>
+              <span class="text-sm text-zinc-300 font-medium">Hiphop</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= 成长经历 ================= -->
+      <div id="growth" class="bento-card md:col-span-2 lg:col-span-4 p-6 sm:p-8"
+           data-tilt data-tilt-max="1" data-tilt-speed="400">
+        <div class="flex items-center gap-2 mb-6 text-xs font-bold uppercase tracking-widest text-sky-300" style="text-shadow: 0 0 12px rgba(125,211,252,0.5)">
+          <span class="w-1 h-4 rounded-full bg-sky-300 shadow-[0_0_8px_rgba(125,211,252,0.7)]"></span>
+          成长经历
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-5">
+          <div class="group">
+            <div class="rounded-xl overflow-hidden border border-zinc-700/50 bg-zinc-900/60 shadow-lg hover:shadow-xl hover:border-brand-400/40 transition-all duration-300">
+              <div class="aspect-[4/3] overflow-hidden">
+                <img src="比赛随拍 .jpg" alt="比赛随拍" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              </div>
+            </div>
+            <p class="mt-2 text-center text-sm font-bold text-white tracking-wide">比赛随拍</p>
+          </div>
+          <div class="group">
+            <div class="rounded-xl overflow-hidden border border-zinc-700/50 bg-zinc-900/60 shadow-lg hover:shadow-xl hover:border-brand-400/40 transition-all duration-300">
+              <div class="aspect-[4/3] overflow-hidden">
+                <img src="钢琴十级证书.jpg" alt="钢琴十级证书" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              </div>
+            </div>
+            <p class="mt-2 text-center text-sm font-bold text-white tracking-wide">钢琴十级证书</p>
+          </div>
+          <div class="group">
+            <div class="rounded-xl overflow-hidden border border-zinc-700/50 bg-zinc-900/60 shadow-lg hover:shadow-xl hover:border-brand-400/40 transition-all duration-300">
+              <div class="aspect-[4/3] overflow-hidden">
+                <img src="舞蹈十级证书 .jpg" alt="舞蹈十级证书" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              </div>
+            </div>
+            <p class="mt-2 text-center text-sm font-bold text-white tracking-wide">舞蹈十级证书</p>
+          </div>
+          <div class="group">
+            <div class="rounded-xl overflow-hidden border border-zinc-700/50 bg-zinc-900/60 shadow-lg hover:shadow-xl hover:border-brand-400/40 transition-all duration-300">
+              <div class="aspect-[4/3] overflow-hidden">
+                <img src="市优秀干部.jpg" alt="市优秀干部" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              </div>
+            </div>
+            <p class="mt-2 text-center text-sm font-bold text-white tracking-wide">市优秀干部</p>
+          </div>
+          <div class="group">
+            <div class="rounded-xl overflow-hidden border border-zinc-700/50 bg-zinc-900/60 shadow-lg hover:shadow-xl hover:border-brand-400/40 transition-all duration-300">
+              <div class="aspect-[4/3] overflow-hidden">
+                <img src="第十六届国际少儿书画大赛金奖.jpg" alt="第十六届国际少儿书画大赛金奖" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              </div>
+            </div>
+            <p class="mt-2 text-center text-sm font-bold text-white tracking-wide">第十六届国际少儿书画大赛金奖</p>
+          </div>
+          <div class="group">
+            <div class="rounded-xl overflow-hidden border border-zinc-700/50 bg-zinc-900/60 shadow-lg hover:shadow-xl hover:border-brand-400/40 transition-all duration-300">
+              <div class="aspect-[4/3] overflow-hidden">
+                <img src="入选世界获奖儿童画.jpg" alt="入选世界获奖儿童画" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              </div>
+            </div>
+            <p class="mt-2 text-center text-sm font-bold text-white tracking-wide">入选世界获奖儿童画</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Page Footer -->
+  <footer class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 border-t border-zinc-800/80 no-print text-center text-xs text-zinc-500 font-mono">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        © 2026 党培峰 Dang Peifeng · Designed with 3D Bento Spatial Architecture
+      </div>
+      <div class="flex items-center gap-4">
+        <span>Built with Tailwind CSS & Web Audio API</span>
+        <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="p-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-zinc-300 border border-zinc-800">
+          <i data-lucide="arrow-up" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Detail Modal Popup -->
+  <div id="project-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 no-print">
+    <div class="bento-card max-w-2xl w-full p-6 sm:p-8 max-h-[85vh] overflow-y-auto transform scale-95 transition-all duration-300" id="modal-container">
+      <div class="flex items-center justify-between pb-4 border-b border-zinc-800">
+        <h3 id="modal-title" class="text-xl font-bold text-white">项目解构详情</h3>
+        <button onclick="closeModal()" class="p-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+      <div id="modal-body" class="py-4 text-xs sm:text-sm text-zinc-300 leading-relaxed space-y-4">
+        <!-- Dynamic Content Injected via JS -->
+      </div>
+      <div class="pt-4 border-t border-zinc-800 flex justify-end">
+        <button onclick="closeModal()" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold text-xs">
+          关闭窗口
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Code Section -->
+  <script>
+    /* ================= 1. SOUND EFFECTS & AUDIO SYNTHESIZER ================= */
+    let sfxEnabled = true;
+    let audioCtx = null;
+
+    function initAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function toggleSFX() {
+      sfxEnabled = !sfxEnabled;
+      const icon = document.getElementById('sfx-icon');
+      if (sfxEnabled) {
+        icon.setAttribute('data-lucide', 'volume-2');
+        playClickSFX();
+      } else {
+        icon.setAttribute('data-lucide', 'volume-x');
+      }
+      lucide.createIcons();
+    }
+
+    function playClickSFX() {
+      if (!sfxEnabled) return;
+      initAudioContext();
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(400, audioCtx.currentTime + 0.08);
+        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.08);
+      } catch(e) {}
+    }
+
+    function playPianoKey(freq, name, keyId) {
+      initAudioContext();
+      playClickSFX();
+
+      // Highlight Key UI
+      const keyElem = document.getElementById('key-' + keyId);
+      if (keyElem) {
+        keyElem.classList.add('active');
+        setTimeout(() => keyElem.classList.remove('active'), 200);
+      }
+
+      document.getElementById('piano-key-display').innerText = `当前按键: ${name} (${freq}Hz)`;
+
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.2);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 1.2);
+
+        // Trigger Equalizer animation burst
+        triggerEqualizerBurst();
+      } catch(e) {}
+    }
+
+    // Auto Play Demo Song (Canon in D snippet)
+    let songTimeout = null;
+    function playSong(song) {
+      stopSong();
+      const notes = [
+        { freq: 392.00, name: 'Sol(G4)', key: '5', delay: 0 },
+        { freq: 329.63, name: 'Mi(E4)', key: '3', delay: 350 },
+        { freq: 349.23, name: 'Fa(F4)', key: '4', delay: 700 },
+        { freq: 392.00, name: 'Sol(G4)', key: '5', delay: 1050 },
+        { freq: 261.63, name: 'Do(C4)', key: '1', delay: 1400 },
+        { freq: 293.66, name: 'Re(D4)', key: '2', delay: 1750 },
+        { freq: 329.63, name: 'Mi(E4)', key: '3', delay: 2100 },
+        { freq: 349.23, name: 'Fa(F4)', key: '4', delay: 2450 },
+      ];
+
+      notes.forEach(n => {
+        songTimeout = setTimeout(() => {
+          playPianoKey(n.freq, n.name, n.key);
+        }, n.delay);
+      });
+    }
+
+    function stopSong() {
+      if (songTimeout) clearTimeout(songTimeout);
+    }
+
+    function playAudioIntro() {
+      initAudioContext();
+      alert("党培峰语音向导: ‘你好！欢迎来到我的 3D 空间简历！我是一名跨界计算机、机器人与艺术的准大生！’");
+    }
+
+    /* ================= 2. AI PERSONA CHAT LOGIC ================= */
+    const aiResponses = {
+      why_hire: "【录用逻辑】党培峰具备三大核心优势：1. 编程逻辑扎实，精通 Python/C；2. 熟练运用 AIGC 工具，具备高效创作与工作流构建能力；3. 双十级艺术修养+班长管理才能，沟通与抗压能力强！",
+      aigc_skills: "【AIGC 提效实践】他深入掌握 Prompt 结构化撰写，能利用 AI 快速完成专业 PPT 排版、Python 算法框架调试以及 AI 音效合成，建立规范顺畅的交付管线！",
+      robot_exp: "【机器人项目】作为大赛核心队员，他负责传感器与控制电路调试，用 Python/C 编写避障规划代码，经过 30+ 组实测，使避障精度提升了 30%！",
+      arts_bg: "【跨界艺术】持有上海音乐学院钢琴十级与中国舞十级认证，获得国美绘画一等奖。艺术训练培养了他对细节的高标准要求与出色的现场表达气场！"
+    };
+
+    function askAI(key) {
+      playClickSFX();
+      const screen = document.getElementById('ai-chat-screen');
+      const status = document.getElementById('typing-status');
+      
+      const questionText = event.target.innerText.trim();
+      
+      // Append user message
+      screen.innerHTML += `<div class="text-right text-brand-300"><span class="bg-brand-500/10 px-2 py-1 rounded-lg border border-brand-500/20">${questionText}</span></div>`;
+      screen.scrollTop = screen.scrollHeight;
+
+      status.innerText = "AI 正在思考生成...";
+
+      setTimeout(() => {
+        const reply = aiResponses[key] || "很高兴与您交流！";
+        screen.innerHTML += `<div class="text-zinc-300 flex items-start gap-1.5"><span class="text-brand-400 font-bold">[AI]:</span> <span class="typing-cursor">${reply}</span></div>`;
+        screen.scrollTop = screen.scrollHeight;
+        status.innerText = "在线就绪";
+      }, 500);
+    }
+
+    /* ================= 3. ROBOT PATHFINDING SIMULATOR ================= */
+    let robotCanvas, robotCtx;
+    let robot = { x: 30, y: 50, radius: 8, vx: 1.5, vy: 1 };
+    let target = { x: 280, y: 50, radius: 10 };
+    let obstacles = [
+      { x: 120, y: 40, r: 16 },
+      { x: 180, y: 70, r: 14 },
+      { x: 220, y: 30, r: 15 }
+    ];
+
+    function initRobotSim() {
+      robotCanvas = document.getElementById('robot-canvas');
+      if (!robotCanvas) return;
+      robotCtx = robotCanvas.getContext('2d');
+      resizeRobotCanvas();
+
+      robotCanvas.addEventListener('click', (e) => {
+        const rect = robotCanvas.getBoundingClientRect();
+        const cx = e.clientX - rect.left;
+        const cy = e.clientY - rect.top;
+        
+        // Toggle or add obstacle
+        obstacles.push({ x: cx, y: cy, r: 15 });
+        if (obstacles.length > 7) obstacles.shift();
+        
+        document.getElementById('obstacle-count').innerText = `障碍物数: ${obstacles.length} | 状态: 实时规划中`;
+        playClickSFX();
+      });
+
+      requestAnimationFrame(updateRobotSim);
+    }
+
+    function resizeRobotCanvas() {
+      if (!robotCanvas) return;
+      robotCanvas.width = robotCanvas.parentElement.clientWidth;
+      robotCanvas.height = robotCanvas.parentElement.clientHeight;
+      target.x = robotCanvas.width - 40;
+      target.y = robotCanvas.height / 2;
+    }
+
+    function resetRobotCanvas() {
+      obstacles = [];
+      robot.x = 30;
+      robot.y = robotCanvas.height / 2;
+      document.getElementById('obstacle-count').innerText = `障碍物数: 0 | 状态: 直线最短`;
+      playClickSFX();
+    }
+
+    function updateRobotSim() {
+      if (!robotCtx) return;
+      robotCtx.clearRect(0, 0, robotCanvas.width, robotCanvas.height);
+
+      // Draw Grid Lines
+      robotCtx.strokeStyle = 'rgba(255,255,255,0.05)';
+      robotCtx.lineWidth = 1;
+      for (let x = 0; x < robotCanvas.width; x += 20) {
+        robotCtx.beginPath(); robotCtx.moveTo(x, 0); robotCtx.lineTo(x, robotCanvas.height); robotCtx.stroke();
+      }
+
+      // Move Robot towards Target with Obstacle Avoidance Vector
+      let dx = target.x - robot.x;
+      let dy = target.y - robot.y;
+      let dist = Math.sqrt(dx*dx + dy*dy);
+
+      let forceX = (dx / dist) * 1.5;
+      let forceY = (dy / dist) * 1.5;
+
+      // Obstacle Repulsion
+      obstacles.forEach(obs => {
+        let odx = robot.x - obs.x;
+        let ody = robot.y - obs.y;
+        let odist = Math.sqrt(odx*odx + ody*ody);
+        if (odist < obs.r + 35) {
+          let rep = (obs.r + 35 - odist) / 10;
+          forceX += (odx / odist) * rep;
+          forceY += (ody / odist) * rep;
+        }
+
+        // Draw Obstacle
+        robotCtx.fillStyle = 'rgba(239, 68, 68, 0.3)';
+        robotCtx.strokeStyle = '#ef4444';
+        robotCtx.beginPath();
+        robotCtx.arc(obs.x, obs.y, obs.r, 0, Math.PI * 2);
+        robotCtx.fill();
+        robotCtx.stroke();
+      });
+
+      robot.x += forceX;
+      robot.y += forceY;
+
+      if (dist < 15) {
+        robot.x = 30;
+        robot.y = robotCanvas.height / 2;
+      }
+
+      // Draw Robot Trail Line
+      robotCtx.strokeStyle = '#10b981';
+      robotCtx.setLineDash([4, 4]);
+      robotCtx.beginPath();
+      robotCtx.moveTo(robot.x, robot.y);
+      robotCtx.lineTo(target.x, target.y);
+      robotCtx.stroke();
+      robotCtx.setLineDash([]);
+
+      // Draw Target
+      robotCtx.fillStyle = '#0ea5e9';
+      robotCtx.beginPath();
+      robotCtx.arc(target.x, target.y, 8, 0, Math.PI * 2);
+      robotCtx.fill();
+
+      // Draw Robot
+      robotCtx.fillStyle = '#10b981';
+      robotCtx.shadowColor = '#10b981';
+      robotCtx.shadowBlur = 10;
+      robotCtx.beginPath();
+      robotCtx.arc(robot.x, robot.y, 7, 0, Math.PI * 2);
+      robotCtx.fill();
+      robotCtx.shadowBlur = 0;
+
+      requestAnimationFrame(updateRobotSim);
+    }
+
+    /* ================= 4. AUDIO EQUALIZER CANVAS ================= */
+    let eqCanvas, eqCtx;
+    let eqBars = new Array(30).fill(10);
+
+    function initEqualizer() {
+      eqCanvas = document.getElementById('equalizer-canvas');
+      if (!eqCanvas) return;
+      eqCtx = eqCanvas.getContext('2d');
+      eqCanvas.width = eqCanvas.parentElement.clientWidth;
+      eqCanvas.height = eqCanvas.parentElement.clientHeight;
+      drawEqualizer();
+    }
+
+    function triggerEqualizerBurst() {
+      eqBars = eqBars.map(() => Math.random() * (eqCanvas.height - 5) + 5);
+    }
+
+    function drawEqualizer() {
+      if (!eqCtx) return;
+      eqCtx.clearRect(0, 0, eqCanvas.width, eqCanvas.height);
+
+      const barWidth = eqCanvas.width / eqBars.length;
+      eqBars.forEach((val, i) => {
+        eqBars[i] = Math.max(4, val * 0.92); // Decay
+
+        const gradient = eqCtx.createLinearGradient(0, eqCanvas.height, 0, 0);
+        gradient.addColorStop(0, '#f59e0b');
+        gradient.addColorStop(1, '#ec4899');
+
+        eqCtx.fillStyle = gradient;
+        eqCtx.fillRect(i * barWidth, eqCanvas.height - eqBars[i], barWidth - 2, eqBars[i]);
+      });
+
+      requestAnimationFrame(drawEqualizer);
+    }
+
+    /* ================= 5. BACKGROUND STARFIELD PARTICLES ================= */
+    let bgCanvas, bgCtx;
+    let particles = [];
+    let mouse = { x: null, y: null };
+
+    function initBgCanvas() {
+      bgCanvas = document.getElementById('bg-canvas');
+      if (!bgCanvas) return;
+      bgCtx = bgCanvas.getContext('2d');
+      bgCanvas.width = window.innerWidth;
+      bgCanvas.height = window.innerHeight;
+
+      particles = [];
+      for (let i = 0; i < 60; i++) {
+        particles.push({
+          x: Math.random() * bgCanvas.width,
+          y: Math.random() * bgCanvas.height,
+          size: Math.random() * 2 + 0.5,
+          vx: (Math.random() - 0.5) * 0.6,
+          vy: (Math.random() - 0.5) * 0.6,
+          alpha: Math.random() * 0.5 + 0.2
+        });
+      }
+
+      window.addEventListener('mousemove', (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+
+        // Move Custom Cursor Ring & Center Purple Dot
+        const ring = document.getElementById('custom-cursor-ring');
+        const dot = document.getElementById('custom-cursor-dot');
+        if (ring) {
+          ring.style.left = e.clientX + 'px';
+          ring.style.top = e.clientY + 'px';
+        }
+        if (dot) {
+          dot.style.left = e.clientX + 'px';
+          dot.style.top = e.clientY + 'px';
+        }
+
+        // Move Cursor Glow element
+        const glow = document.getElementById('cursor-glow');
+        if (glow) {
+          glow.style.left = e.clientX + 'px';
+          glow.style.top = e.clientY + 'px';
+        }
+
+        // Detect Distance to Bento Cards to trigger Fluid Flow animation
+        const cards = document.querySelectorAll('.bento-card');
+        cards.forEach(card => {
+          const rect = card.getBoundingClientRect();
+          const dx = Math.max(rect.left - e.clientX, 0, e.clientX - rect.right);
+          const dy = Math.max(rect.top - e.clientY, 0, e.clientY - rect.bottom);
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          // Trigger liquid gradient flow effect when cursor is within 120px proximity
+          if (distance < 120) {
+            card.classList.add('card-flowing');
+          } else {
+            card.classList.remove('card-flowing');
+          }
+        });
+      });
+
+      // Interactive hover feedback for custom cursor
+      document.querySelectorAll('a, button, input').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          const ring = document.getElementById('custom-cursor-ring');
+          if (ring) {
+            ring.style.transform = 'translate(-50%, -50%) scale(1.4)';
+            ring.style.borderColor = '#a855f7';
+          }
+        });
+        el.addEventListener('mouseleave', () => {
+          const ring = document.getElementById('custom-cursor-ring');
+          if (ring) {
+            ring.style.transform = 'translate(-50%, -50%) scale(1)';
+            ring.style.borderColor = 'rgba(255, 255, 255, 0.9)';
+          }
+        });
+      });
+
+      animateBgCanvas();
+    }
+
+    function animateBgCanvas() {
+      if (!bgCtx) return;
+      bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > bgCanvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > bgCanvas.height) p.vy *= -1;
+
+        bgCtx.fillStyle = `rgba(56, 189, 248, ${p.alpha})`;
+        bgCtx.beginPath();
+        bgCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        bgCtx.fill();
+      });
+
+      requestAnimationFrame(animateBgCanvas);
+    }
+
+    /* ================= 6. HELPER UTILITIES & MODAL ENGINE ================= */
+    function filterSkills(category) {
+      playClickSFX();
+      const btns = document.querySelectorAll('.skill-tab-btn');
+      btns.forEach(b => b.classList.remove('bg-brand-600', 'text-white', 'font-bold'));
+      event.target.classList.add('bg-brand-600', 'text-white', 'font-bold');
+
+      const cards = document.querySelectorAll('.skill-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    const modalData = {
+      'modal-aigc': {
+        title: 'AIGC 数字化创作与轻量应用开发 - 深度解构',
+        content: `<p><strong>解构背景：</strong>将 ChatGPT、Claude 等大语言模型融入实际应用流。建立 Prompt 模块化范式，实现从需求提炼到自动化输出的高效交付。</p>
+                  <p><strong>技术亮点：</strong></p>
+                  <ul class="list-disc pl-5 space-y-1">
+                    <li>编写 Python 脚本调用 API 进行自动化排版与内容生成。</li>
+                    <li>利用 AI 辅助 2 天内完成轻量游戏原型设计与 Bug 调试。</li>
+                    <li>组合 AI 声音模型与乐理知识制作原创乐曲片段。</li>
+                  </ul>`
+      },
+      'modal-robot': {
+        title: '机器人技术应用与创新大赛 - 深度解构',
+        content: `<p><strong>解构背景：</strong>面对复杂障碍赛道，带领硬件调试小组针对车体响应时延与避障算法进行极致攻坚。</p>
+                  <p><strong>技术亮点：</strong></p>
+                  <ul class="list-disc pl-5 space-y-1">
+                    <li>构建传感器向量场避障模型，实时调整左右电机 PWM 脉冲。</li>
+                    <li>克服超声波与红外传感器的信号干涉问题，将响应精准度提升 30%。</li>
+                    <li>完成 30+ 组不同环境下的稳定测试，荣获大赛创新奖。</li>
+                  </ul>`
+      }
+    };
+
+    function openModal(key) {
+      playClickSFX();
+      const modal = document.getElementById('project-modal');
+      const data = modalData[key];
+      if (!data) return;
+
+      document.getElementById('modal-title').innerText = data.title;
+      document.getElementById('modal-body').innerHTML = data.content;
+
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      document.getElementById('modal-container').classList.remove('scale-95');
+    }
+
+    function closeModal() {
+      playClickSFX();
+      const modal = document.getElementById('project-modal');
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      document.getElementById('modal-container').classList.add('scale-95');
+    }
+
+    function copyEmail() {
+      playClickSFX();
+      const email = '3318182743@qq.com';
+      const input = document.createElement('input');
+      input.value = email;
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand('copy');
+      document.body.removeChild(input);
+
+      const label = document.getElementById('email-label');
+      label.innerText = '已复制 3318182743@qq.com !';
+      setTimeout(() => label.innerText = '复制联系邮箱', 2500);
+    }
+
+    function toggleTheme() {
+      playClickSFX();
+      document.documentElement.classList.toggle('dark');
+    }
+
+    // Live Clock Updates
+    setInterval(() => {
+      const clock = document.getElementById('live-clock');
+      if (clock) {
+        const now = new Date();
+        clock.innerText = now.toTimeString().split(' ')[0];
+      }
+    }, 1000);
+
+    // Keyboard Shortcuts for Piano
+    window.addEventListener('keydown', (e) => {
+      const keyMap = {
+        '1': { freq: 261.63, name: 'C4', id: '1' },
+        '2': { freq: 293.66, name: 'D4', id: '2' },
+        '3': { freq: 329.63, name: 'E4', id: '3' },
+        '4': { freq: 349.23, name: 'F4', id: '4' },
+        '5': { freq: 392.00, name: 'G4', id: '5' },
+        '6': { freq: 440.00, name: 'A4', id: '6' },
+        '7': { freq: 493.88, name: 'B4', id: '7' }
+      };
+      if (keyMap[e.key]) {
+        playPianoKey(keyMap[e.key].freq, keyMap[e.key].name, keyMap[e.key].id);
+      }
+    });
+
+    // Window Resize Handling
+    window.addEventListener('resize', () => {
+      resizeRobotCanvas();
+      if (bgCanvas) {
+        bgCanvas.width = window.innerWidth;
+        bgCanvas.height = window.innerHeight;
+      }
+    });
+
+    // 证书灯箱
+    function openCertLightbox(src, title) {
+      const lb = document.getElementById('cert-lightbox');
+      const img = document.getElementById('cert-lightbox-img');
+      const tt = document.getElementById('cert-lightbox-title');
+      img.src = src;
+      tt.textContent = title;
+      lb.classList.remove('opacity-0', 'pointer-events-none');
+      lb.classList.add('opacity-100');
+    }
+    function closeCertLightbox() {
+      const lb = document.getElementById('cert-lightbox');
+      lb.classList.add('opacity-0', 'pointer-events-none');
+      lb.classList.remove('opacity-100');
+    }
+
+    // Initialize All Interactive Labs on DOM Load
+    window.onload = function() {
+      lucide.createIcons();
+      initBgCanvas();
+      initRobotSim();
+      initEqualizer();
+      
+      // Initialize Vanilla Tilt 3D Effect on Bento Cards
+      if (typeof VanillaTilt !== 'undefined') {
+        VanillaTilt.init(document.querySelectorAll("[data-tilt]"));
+      }
+    };
+  </script>
+<!-- 证书灯箱弹窗 -->
+  <div id="cert-lightbox" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300" onclick="closeCertLightbox()">
+    <div class="relative max-w-3xl w-full max-h-[90vh]" onclick="event.stopPropagation()">
+      <button onclick="closeCertLightbox()" class="absolute -top-10 right-0 p-2 text-zinc-400 hover:text-white transition-colors">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+      <img id="cert-lightbox-img" src="" alt="" class="w-full h-auto max-h-[85vh] object-contain rounded-2xl shadow-2xl">
+      <p id="cert-lightbox-title" class="text-center text-white text-sm font-bold mt-3"></p>
+    </div>
+  </div>
+
+</body>
+</html>
